@@ -1,1 +1,0 @@
-This project is for Online Transport System In bangladesh.
