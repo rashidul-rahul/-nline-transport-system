@@ -21,7 +21,7 @@ include_once ('layout/Header.php');
             </div>
             <div class="col-lg-3 col-md-6 col-lg-offset-1">
                 <div class="about_banner">
-                    <img src="images/man.png" alt="" />
+                    <img src="images/Untitled.jpg" alt="" />
                 </div>
             </div>
         </div>

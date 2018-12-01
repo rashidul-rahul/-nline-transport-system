@@ -3,11 +3,12 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <?php
 include_once ('layout/logOutHead.php');
-include_once ('layout/header.php');
+//include_once ('layout/header.php');
 include_once ('lib/post.php');
 
 $postData = new Post();
 $posts = $postData->allPost();
+$loop = 1;
 ?>
 
     <body>
@@ -27,12 +28,12 @@ $posts = $postData->allPost();
                         <img src="images/slider_img.jpg" alt="Construction">
                         <div class="overlay">
                             <div class="carousel-caption">
-                                <h3>Online Transport System</h3>
+                                <h3>Online Transport Service</h3>
 <!--                                <h1>Construction Services</h1>-->
 <!--                                <h1 class="second_heading">Creative & Professional</h1>-->
-                                <p>If you have a truck you can post an ADD here or want to hire a car you can find here</p>
-                                <a href="signup.php" class="btn know_btn">Have a Car</a>
-                                <a href="" class="btn know_btn">Need a Car</a>
+                                <p>We serve here lots of car, bus, truck, pickup</p>
+                                <a href="signup.php" class="btn know_btn">Signup and Add Post</a>
+                                <a href="" class="btn know_btn">Need Transport Service</a>
                             </div>					
                         </div>
                     </div>
@@ -63,8 +64,7 @@ $posts = $postData->allPost();
         <!-- Services -->
         <section id="services">
             <div class="container">
-                <h2>OUR SERVICES</h2>
-                <div class="row">
+                <h2>AVAILABLE TRANSPORT</h2>
 <!--                    <div class="col-md-4">-->
 <!--                        <div class="service_item">-->
 <!--                            <img src="images/service_img1.jpg" alt="Our Services" />-->
@@ -83,19 +83,27 @@ $posts = $postData->allPost();
 <!--                    </div>-->
                     <?php
                     foreach ($posts as $post){
-                    ?>
-                    <div class="col-md-4">
-                        <div class="service_item">
-                            <img src="<?= $post->image ?>" alt="Our Services"/>
-                            <h4><?= $post->title ?></h4>
-                            <a href="lviewPost.php?id=<?=$post->id?>" class="btn know_btn">know more</a>
+                        ?>
+                        <?php
+                        if ($loop%3==0){
+                            echo '<div class="row">';
+                        }
+                        ?>
+                        <div class="col-md-4">
+                            <div class="service_item">
+                                <img src="<?= $post->image ?>" alt="Our Services"/>
+                                <h4><?= $post->title ?></h4>
+                                <a href="lviewPost.php?id=<?=$post->id?>" class="btn know_btn">know more</a>
+                            </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
+                        if ($loop%3==0){
+                            echo '</div>';
+                        }
+                        $loop++;
                     }
                     ?>
-                </div>
-            </div>
+
         </section><!-- Services end -->
 
         <?php

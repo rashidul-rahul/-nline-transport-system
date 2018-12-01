@@ -8,6 +8,11 @@ include_once ('layout/head.php');
 <!-- Header -->
 <?php
 include_once ('layout/header.php');
+include_once ('lib/post.php');
+
+$postData = new Post();
+$posts = $postData->allPost();
+$loop = 1;
 ?>
 <!-- Header end -->
 
@@ -63,34 +68,30 @@ include_once ('layout/header.php');
             echo $data;
             session::setNull("logInMsg");
         }?>
-        <h2>OUR SERVICES</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="service_item">
-                    <img src="images/service_img1.jpg" alt="Our Services" />
-                    <h3>CONSTRUCTION MANAGEMENT</h3>
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,</p>
-                    <a href="#services" class="btn know_btn">know more</a>
+        <h2>AVAILABLE TRANSPORT</h2>
+            <?php
+            foreach ($posts as $post){
+                ?>
+        <?php
+        if ($loop%3==0){
+            echo '<div class="row">';
+        }
+        ?>
+                <div class="col-md-4">
+                    <div class="service_item">
+                        <img src="<?= $post->image ?>" alt="Our Services"/>
+                        <h4><?= $post->title ?></h4>
+                        <a href="viewPost.php?id=<?=$post->id?>" class="btn know_btn">know more</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="service_item">
-                    <img src="images/service_img2.jpg" alt="Our Services" />
-                    <h3>RENOVATION</h3>
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,</p>
-                    <a href="#services" class="btn know_btn">know more</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="service_item">
-                    <img src="images/service_img3.jpg" alt="Our Services" />
-                    <h3>ARCHITECTURE</h3>
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,</p>
-                    <a href="#services" class="btn know_btn">know more</a>
-                </div>
-            </div>
+                <?php
+                if ($loop%3==0){
+                    echo '</div>';
+                }
+                $loop++;
+            }
+            ?>
         </div>
-    </div>
 </section><!-- Services end -->
 
 <?php
